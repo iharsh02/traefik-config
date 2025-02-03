@@ -1,0 +1,20 @@
+services:
+  reverse-proxy:
+    image: traefik:v3.3
+    ports:
+      - "80:80"
+      - "443:443" 
+      - "8080:8080" # remove in production only for debugging
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ./data/certs:/var/certs/:rw # for storing SSL certificates
+    networks:
+      - web-external
+    restart: unless-stopped
+
+networks:
+  web-external:
+    external: true
