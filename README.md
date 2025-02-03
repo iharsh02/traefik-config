@@ -14,18 +14,21 @@ This repository contains a configuration for setting up Traefik as a reverse pro
    git clone <repository-url>
    cd <repository-directory>
    ```
-
-
 2. **Create a .env file: Create a .env file in the root directory of the project and add your Cloudflare API token:**
-  ```sh
-   CF_DNS_API_TOKEN=your-cloudflare-dns-api-token
-  ```
-3. **Set permissions for the certificates directory:**
+     ```sh
+      CF_DNS_API_TOKEN=your-cloudflare-dns-api-token
+     ```
+3. **Create necessary directories:**
+   ```sh
+   mkdir -p data/certs
+   ```
+
+4. **Set permissions for the certificates directory:**
 
     ```sh
     sudo chmod 600 data/certs
     ```
-4. **Start the services:**
+5. **Start the services:**
     ```sh
     docker compose up 
     ```
